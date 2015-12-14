@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body>
+	<h2>關閉輸入法</h2>
+	<input type="text" id="banInputMethod" banInputMethod="1">
+	
+
+	<script type="text/javascript">
+
+		window.onload = function(){
+			var arr= [document.getElementById('banInputMethod')],
+				self = this;
+
+			for(var i = 0 , arrLen = arr.length ; i < arrLen ;  i++){
+				var arrI = arr[i];
+				arrI.onfocus = function(){
+					this.style.imeMode = 'disabled';
+				};
+
+				var banInputMethod =  arrI.getAttribute("banInputMethod");
+				if(banInputMethod){
+					var clearChinese = function(_this){
+						_this.value = _this.value.replace(/[\u4e00-\u9fa5]/g,"");
+					}
+					arrI.onkeyup = function(){
+						clearChinese(this);
+					}
+					arrI.onblur = function(){
+						clearChinese(this);
+					}
+				}
+			}
+		};
+
+	</script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>
